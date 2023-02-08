@@ -11,7 +11,6 @@ const inputSec = document.querySelector('.input-seconds');
 const btn = document.querySelector('.btn');
 
 btn.addEventListener('click', function () {
-    const dateNow = Date.now();
     const inputDate = new Date(
         inputYear.value,
         inputMonth.value - 1,
@@ -19,9 +18,14 @@ btn.addEventListener('click', function () {
         inputHours.value,
         inputMinutes.value,
         inputSec.value
-    ).getTime();
+        ).getTime();
 
-    const period = inputDate - dateNow;
+        counting(inputDate);
+    });
+
+const counting = (inputDate) => setInterval(() => {
+        const dateNow = Date.now();
+        const period = inputDate - dateNow;
 
     let days = Math.floor(period / (1000 * 60 * 60 * 24));
     let hours = Math.floor((period % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
@@ -32,4 +36,5 @@ btn.addEventListener('click', function () {
     document.querySelector('.result-hours').textContent = hours;
     document.querySelector('.result-minutes').textContent = minutes;
     document.querySelector('.result-sec').textContent = seconds;
-});
+    
+}, 1000);
