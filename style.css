@@ -1,1 +1,21 @@
-
+body {
+    padding-top: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+.input-forms {
+    width: 600px;
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 30px;
+}
+.btn {
+    margin-bottom: 30px;
+    width: 600px;
+    background-color: bisque;
+    border-radius: 3px;
+    line-height: 30px;
+    text-align: center;
+}

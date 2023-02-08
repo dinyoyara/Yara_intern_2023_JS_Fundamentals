@@ -9,6 +9,35 @@
         <link rel="stylesheet" href="style.css"></link>
     </head>
     <body>
-
+      <div class="title"></div>
+      <div class="input-forms">
+          <input type="number" min="1" max="31" value="1" class="input input-day">
+          <select class="input input-months">
+            <option value="1">Janyary</option>
+            <option value="2">February</option>
+            <option value="3">March</option>
+            <option value="4">April</option>
+            <option value="5">May</option>
+            <option value="6">June </option>
+            <option value="7">July</option>
+            <option value="8">August</option>
+            <option value="9">September</option>
+            <option value="10">October</option>
+            <option value="11">November</option>
+            <option value="12">December</option>
+          <input type="number" min="2023" value="2023"  class="input input-year">
+          <div class="time-container">
+            <input type="number" min="0" max="24" value="00" class="input input-hours"/>
+            <input type="number" min="0" max="59" value="00"class="input input-minutes"/>
+            <input type="number" min="0" max="59" value="00" class="input input-seconds"/>
+          </div>
+      </div>
+      <div class="btn">START</div>
+      <div class="result-display">
+        <input type="text" class="result-display">
+        <input type="text" class="result-hours">
+        <input type="text" class="result-minutes">
+        <input type="text" class="result-sec">
+      </div>
     </body>
 </html>
