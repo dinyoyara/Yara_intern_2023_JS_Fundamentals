@@ -19,3 +19,15 @@ body {
     line-height: 30px;
     text-align: center;
 }
+.result-display {
+    width: 600px;
+    display: flex;
+    justify-content: space-around;
+}
+.result {
+    width: 20%;
+    text-align: center;
+    background-color: rgb(184, 130, 63);
+    border-radius: 3px;
+    color: white;
+}
