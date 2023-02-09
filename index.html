@@ -31,12 +31,14 @@
           <input type="number" min="2023" class="input input-year">
           <div class="time-container">
             <input type="number" min="0" max="23" class="input input-hours"/>
+            <span class="dots">:</span>
             <input type="number" min="0" max="59" class="input input-minutes"/>
+            <span class="dots">:</span>
             <input type="number" min="0" max="59" class="input input-seconds"/>
           </div>
       </div>
       <button class="btn btn-start">START</button>
-      <button class="btn btn-reset hidden">RESET</button>
+      <button class="btn btn-reset hidden">CLEAR</button>
       <div class="result-boxes-container hidden">
         <div class="result-box">
           <div class="label">DAYS</div>
@@ -57,6 +59,9 @@
       </div>
       <div class="message hidden">
         <span class="text"></span>
+      </div>
+      <div class="footer">
+        <span class="time-now"></span>
       </div>
     </body>
 </html>
