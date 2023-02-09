@@ -1,5 +1,6 @@
 'strict mode';
 
+const mainMessage = document.querySelector('.main-message');
 const inputForm = document.querySelector('.input-forms');
 
 const inputDay = document.querySelector('.input-day');
@@ -109,11 +110,32 @@ const switchButtons = () => {
     changeVisibility(btnReset);
 };
 
+const switchInputFormsAndMainMessage = () => {
+    changeVisibility(inputForm);
+    changeVisibility(mainMessage);
+};
+
 const showMessage = (messageText) => {
     message.querySelector('.text').textContent = messageText;
     changeVisibility(message);
 };
 
+const getMonthsByIndex = (ind) => {
+    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'];
+    return months[ind];
+};
+
+const setMainMessage = () => {
+    const months = getMonthsByIndex(inputMonth.value);
+    const hour = inputMinutes.value < 10 && inputMinutes.value != 00 ? `0${inputHours.value}` : inputHours.value;
+    const minutes = inputMinutes.value < 10 && inputMinutes.value != 00 ? `0${inputMinutes.value}` : inputMinutes.value;
+    const sec = inputSec.value < 10 && inputSec.value != 00 ? `0${inputSec.value}` : inputSec.value;
+    mainMessage.querySelector(
+        '.text'
+    ).textContent = `Counting to ${inputDay.value} ${months} ${inputYear.value} - ${hour}:${minutes}:${sec}`;
+};
+
+//Chek inputs value
 const getMaxDayByMonth = (monthIndex) => {
     let maxDays = 31;
     switch (monthIndex) {
@@ -127,11 +149,11 @@ const getMaxDayByMonth = (monthIndex) => {
     return maxDays;
 };
 
-//Chek inputs value
 const isInputDayCorrect = (day, monthIndex) => {
     const maxDayValue = getMaxDayByMonth(monthIndex);
     return Number(day) >= 1 && Number(day) <= maxDayValue ? true : false;
 };
+
 const isInputDateCorrect = () => {
     const validDay = isInputDayCorrect(inputDay.value, inputMonth.value);
     const validHours = Number(inputHours.value) >= 0 && Number(inputHours.value) <= 23;
@@ -154,6 +176,8 @@ btnStart.addEventListener('click', function () {
     showTimePeriod(inputDate);
     setIntervalNumber = counting(inputDate);
     changeVisibility(resultConteiner);
+    setMainMessage();
+    switchInputFormsAndMainMessage();
     switchButtons();
 });
 
@@ -161,6 +185,7 @@ btnReset.addEventListener('click', function () {
     changeVisibility(resultConteiner);
     clearInterval(setIntervalNumber);
     showCurrentDate();
+    switchInputFormsAndMainMessage();
     switchButtons();
 });
 
@@ -168,4 +193,3 @@ inputForm.addEventListener('change', function (e) {
     if (!e.target.classList.contains('input')) return;
     message.classList.contains('hidden') == false && changeVisibility(message);
 });
-20;
