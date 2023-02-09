@@ -128,7 +128,7 @@ const showMessage = (messageText) => {
 
 const getMonthsByIndex = (ind) => {
     const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'];
-    return months[ind];
+    return months[ind - 1];
 };
 
 const setMainMessage = () => {
@@ -172,11 +172,11 @@ const isInputDateCorrect = () => {
 btnStart.addEventListener('click', function () {
     const inputDate = getInputDate();
     if (!isInputDateCorrect()) {
-        showMessage('Hmm, what a date 😲');
+        showMessage('This Date/Time might exist only in a parallel universe 👽');
         return;
     }
     if (getPeriod(inputDate) <= 0) {
-        showMessage('Sorry, you are late🙄');
+        showMessage('Forget about the past, you can`t change it! ❌');
         return;
     }
     showTimePeriod(inputDate);
