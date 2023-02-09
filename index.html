@@ -11,7 +11,7 @@
     <body>
       <div class="title"></div>
       <div class="input-forms">
-          <input type="number" min="1" max="31" value="1" class="input input-day">
+          <input type="number" min="1" max="31"class="input input-day">
           <select class="input input-months">
             <option value="1">Janyary</option>
             <option value="2">February</option>
@@ -25,11 +25,11 @@
             <option value="10">October</option>
             <option value="11">November</option>
             <option value="12">December</option>
-          <input type="number" min="2023" value="2023"  class="input input-year">
+          <input type="number" min="2023" class="input input-year">
           <div class="time-container">
-            <input type="number" min="0" max="24" value="00" class="input input-hours"/>
-            <input type="number" min="0" max="59" value="00"class="input input-minutes"/>
-            <input type="number" min="0" max="59" value="00" class="input input-seconds"/>
+            <input type="number" min="0" max="24" class="input input-hours"/>
+            <input type="number" min="0" max="59" class="input input-minutes"/>
+            <input type="number" min="0" max="59" class="input input-seconds"/>
           </div>
       </div>
       <button class="btn btn-start">START</button>
@@ -51,6 +51,9 @@
           <div class="label">SECONDS</div>
           <div class="result result-sec"></div>
         </div>       
+      </div>
+      <div class="message hidden">
+        <span class="text"></span>
       </div>
     </body>
 </html>
