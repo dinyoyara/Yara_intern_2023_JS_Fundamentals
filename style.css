@@ -8,7 +8,7 @@ body {
 .input-forms {
     width: 600px;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     margin-bottom: 30px;
 }
 .btn {
@@ -19,15 +19,36 @@ body {
     line-height: 30px;
     text-align: center;
 }
-.result-display {
+.result-boxes-container {
     width: 600px;
+    height: 100px;
     display: flex;
-    justify-content: space-around;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+.hidden {
+    display: none;
+}
+.result-box {
+    display: flex;
+    flex-direction: column;
+    width: 20%;
+    margin-bottom: 30px;
+}
+.label {
+    width: 100%;
+    text-align: center;
 }
 .result {
-    width: 20%;
+    width: 100%;
+    height: 80px;
     text-align: center;
+    line-height: 80px;
+    font-size: 32px;
     background-color: rgb(184, 130, 63);
     border-radius: 3px;
     color: white;
+}
+.btn {
+    res
 }
