@@ -22,6 +22,8 @@ const resultSeconds = document.querySelector('.result-sec');
 
 const message = document.querySelector('.message');
 
+const dateNow = document.querySelector('.time-now');
+
 const timePeriod = {
     days: 0,
     hours: 0,
@@ -35,6 +37,10 @@ const currentDate = {
 };
 
 let setIntervalNumber;
+
+setInterval(() => {
+    dateNow.textContent = new Date().toLocaleString();
+}, 500);
 
 const getCurrentDate = () => {
     const dateNow = new Date();
@@ -132,7 +138,7 @@ const setMainMessage = () => {
     const sec = inputSec.value < 10 && inputSec.value != 00 ? `0${inputSec.value}` : inputSec.value;
     mainMessage.querySelector(
         '.text'
-    ).textContent = `Counting to ${inputDay.value} ${months} ${inputYear.value} - ${hour}:${minutes}:${sec}`;
+    ).textContent = `⏳ ${inputDay.value} ${months} ${inputYear.value} - ${hour}:${minutes}:${sec}`;
 };
 
 //Chek inputs value
