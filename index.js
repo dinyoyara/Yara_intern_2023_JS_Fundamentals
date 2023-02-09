@@ -109,19 +109,43 @@ const switchButtons = () => {
     changeVisibility(btnReset);
 };
 
-const showMessage = () => {
-    message.querySelector('.text').textContent = 'Wrong input';
+const showMessage = (messageText) => {
+    message.querySelector('.text').textContent = messageText;
     changeVisibility(message);
 };
+
+const getMaxDayByMonth = (monthIndex) => {
+    let maxDays = 31;
+    switch (monthIndex) {
+        case 2:
+            maxDays = 28;
+            break;
+        case (4, 6, 9, 11):
+            maxDays = 30;
+            break;
+    }
+    return maxDays;
+};
+
+//Chek inputs value
+const IsInputDayCorrect = (day, monthIndex) => {
+    const maxDayValue = getMaxDayByMonth(monthIndex);
+    return day < 1 || day > maxDayValue ? false : true;
+};
+const isInputDateCorrect = (inputDate) => {};
 
 //Events
 btnStart.addEventListener('click', function () {
     const inputDate = getInputDate();
-    showTimePeriod(inputDate);
-    if (getPeriod(inputDate) <= 0) {
-        showMessage();
+    if (!isInputDateCorrect(inputDate)) {
+        showMessage('Hmm, what a date 😲');
         return;
     }
+    if (getPeriod(inputDate) <= 0) {
+        showMessage('Sorry, you are late');
+        return;
+    }
+    showTimePeriod(inputDate);
     setIntervalNumber = counting(inputDate);
     changeVisibility(resultConteiner);
     switchButtons();
