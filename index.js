@@ -117,10 +117,10 @@ const showMessage = (messageText) => {
 const getMaxDayByMonth = (monthIndex) => {
     let maxDays = 31;
     switch (monthIndex) {
-        case 2:
+        case '2':
             maxDays = 28;
             break;
-        case (4, 6, 9, 11):
+        case ('4', '6', '9', '11'):
             maxDays = 30;
             break;
     }
@@ -128,21 +128,27 @@ const getMaxDayByMonth = (monthIndex) => {
 };
 
 //Chek inputs value
-const IsInputDayCorrect = (day, monthIndex) => {
+const isInputDayCorrect = (day, monthIndex) => {
     const maxDayValue = getMaxDayByMonth(monthIndex);
-    return day < 1 || day > maxDayValue ? false : true;
+    return Number(day) >= 1 && Number(day) <= maxDayValue ? true : false;
 };
-const isInputDateCorrect = (inputDate) => {};
+const isInputDateCorrect = () => {
+    const validDay = isInputDayCorrect(inputDay.value, inputMonth.value);
+    const validHours = Number(inputHours.value) >= 0 && Number(inputHours.value) <= 23;
+    const validMinutes = Number(inputMinutes.value) >= 0 && Number(inputMinutes.value) <= 59;
+    const validSeconds = Number(inputSec.value) >= 0 && Number(inputSec.value) <= 59;
+    return validDay && validHours && validMinutes && validSeconds ? true : false;
+};
 
 //Events
 btnStart.addEventListener('click', function () {
     const inputDate = getInputDate();
-    if (!isInputDateCorrect(inputDate)) {
+    if (!isInputDateCorrect()) {
         showMessage('Hmm, what a date 😲');
         return;
     }
     if (getPeriod(inputDate) <= 0) {
-        showMessage('Sorry, you are late');
+        showMessage('Sorry, you are late🙄');
         return;
     }
     showTimePeriod(inputDate);
@@ -158,7 +164,8 @@ btnReset.addEventListener('click', function () {
     switchButtons();
 });
 
-inputForm.addEventListener('click', function (e) {
+inputForm.addEventListener('change', function (e) {
     if (!e.target.classList.contains('input')) return;
     message.classList.contains('hidden') == false && changeVisibility(message);
 });
+20;
