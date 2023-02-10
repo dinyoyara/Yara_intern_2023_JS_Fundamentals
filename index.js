@@ -21,7 +21,7 @@ const resultMinutes = document.querySelector('.result-minutes');
 const resultSeconds = document.querySelector('.result-sec');
 
 const message = document.querySelector('.message');
-
+const bomb = document.querySelector('.bomb');
 const dateNow = document.querySelector('.time-now');
 
 const timePeriod = {
@@ -38,10 +38,7 @@ const currentDate = {
 
 let setIntervalNumber;
 
-setInterval(() => {
-    dateNow.textContent = new Date().toLocaleString();
-}, 500);
-
+//Initial default states
 const getCurrentDate = () => {
     const dateNow = new Date();
     currentDate.day = dateNow.getDate();
@@ -62,6 +59,17 @@ const showCurrentDate = () => {
 };
 showCurrentDate();
 
+const generateDateNowString = (date) => {
+    return `${date.getDate()} ${getMonthsByIndex(date.getMonth() + 1)} ${date.getFullYear()} - ${getTwoDigitsValue(
+        date.getHours()
+    )}:${getTwoDigitsValue(date.getMinutes())}:${getTwoDigitsValue(date.getSeconds())}`;
+};
+
+setInterval(() => {
+    dateNow.textContent = generateDateNowString(new Date());
+}, 1000);
+
+//Work with Inputs
 const getInputDate = () =>
     new Date(
         inputYear.value,
@@ -80,6 +88,11 @@ const getPeriod = (inputDate) => {
 
 const getTimePeriod = (inputDate) => {
     const period = getPeriod(inputDate);
+    console.log(period);
+    if (period < 1000) {
+        console.log('💣');
+        finish();
+    }
 
     timePeriod.days = Math.floor(period / (1000 * 60 * 60 * 24));
     timePeriod.hours = Math.floor((period % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
@@ -105,8 +118,19 @@ const showTimePeriod = (inputDate) => {
     resultSeconds.textContent = seconds;
 };
 
+const setMainMessage = () => {
+    const months = getMonthsByIndex(inputMonth.value);
+    const hour = getTwoDigitsValue(inputHours.value);
+    const minutes = getTwoDigitsValue(inputMinutes.value);
+    const sec = getTwoDigitsValue(inputSec.value);
+    mainMessage.querySelector(
+        '.text'
+    ).textContent = `⏳ ${inputDay.value} ${months} ${inputYear.value} - ${hour}:${minutes}:${sec}`;
+};
+
 const counting = (inputDate) => setInterval(showTimePeriod.bind(null, inputDate), 1000);
 
+//Change elements visibility
 const changeVisibility = (element) => {
     element.classList.toggle('hidden');
 };
@@ -126,19 +150,14 @@ const showMessage = (messageText) => {
     changeVisibility(message);
 };
 
+//Helpers
 const getMonthsByIndex = (ind) => {
     const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'];
     return months[ind - 1];
 };
 
-const setMainMessage = () => {
-    const months = getMonthsByIndex(inputMonth.value);
-    const hour = inputMinutes.value < 10 && inputMinutes.value != 00 ? `0${inputHours.value}` : inputHours.value;
-    const minutes = inputMinutes.value < 10 && inputMinutes.value != 00 ? `0${inputMinutes.value}` : inputMinutes.value;
-    const sec = inputSec.value < 10 && inputSec.value != 00 ? `0${inputSec.value}` : inputSec.value;
-    mainMessage.querySelector(
-        '.text'
-    ).textContent = `⏳ ${inputDay.value} ${months} ${inputYear.value} - ${hour}:${minutes}:${sec}`;
+const getTwoDigitsValue = (value) => {
+    return value.toString().length == 1 ? `0${value}` : value;
 };
 
 //Chek inputs value
@@ -168,8 +187,21 @@ const isInputDateCorrect = () => {
     return validDay && validHours && validMinutes && validSeconds ? true : false;
 };
 
+//Finish counting
+const finish = () => {
+    changeVisibility(bomb);
+    changeVisibility(resultConteiner);
+    clearInterval(setIntervalNumber);
+    setTimeout(() => {
+        showCurrentDate();
+        switchInputFormsAndMainMessage();
+        switchButtons();
+        changeVisibility(bomb);
+    }, 1500);
+};
+
 //Events
-btnStart.addEventListener('click', function () {
+btnStart.addEventListener('click', () => {
     const inputDate = getInputDate();
     if (!isInputDateCorrect()) {
         showMessage('This Date/Time might exist only in a parallel universe 👽');
@@ -187,7 +219,7 @@ btnStart.addEventListener('click', function () {
     switchButtons();
 });
 
-btnReset.addEventListener('click', function () {
+btnReset.addEventListener('click', () => {
     changeVisibility(resultConteiner);
     clearInterval(setIntervalNumber);
     showCurrentDate();
@@ -195,7 +227,7 @@ btnReset.addEventListener('click', function () {
     switchButtons();
 });
 
-inputForm.addEventListener('change', function (e) {
+inputForm.addEventListener('change', (e) => {
     if (!e.target.classList.contains('input')) return;
     message.classList.contains('hidden') == false && changeVisibility(message);
 });
