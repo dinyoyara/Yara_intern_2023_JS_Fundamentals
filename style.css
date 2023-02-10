@@ -38,11 +38,13 @@ body {
     justify-content: flex-end;
 }
 .input {
-    height: 100%;
-    width: 50px;
+    box-sizing: border-box;
+    height: 50px;
+    width: 80px;
     border: none;
     border-radius: 8px;
     margin-right: 10px;
+    padding-left: 15px;
     text-align: center;
     font-size: 24px;
     font-weight: 600;
@@ -55,9 +57,9 @@ body {
     justify-content: space-between;
 }
 .form-labels .text {
-    padding: 3px;
+    padding: 0 3px;
     color: rgba(0, 0, 0, 0.3);
-
+    font-size: 20px;
     font-weight: 600;
 }
 .input-months {
@@ -73,7 +75,7 @@ body {
     width: 10px;
     text-align: center;
     font-size: 24px;
-    line-height: 80px;
+    line-height: 50px;
     font-weight: 600;
 }
 .btn {
