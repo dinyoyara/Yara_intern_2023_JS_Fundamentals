@@ -14,7 +14,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-bottom: 100px;
+    margin-bottom: 50px;
 }
 .main-message .text {
     font-size: 50px;
@@ -28,7 +28,7 @@ body {
     display: flex;
     flex-wrap: wrap;
     justify-content: flex-start;
-    margin-bottom: 100px;
+    margin-bottom: 50px;
 }
 .time-container {
     margin-left: auto;
