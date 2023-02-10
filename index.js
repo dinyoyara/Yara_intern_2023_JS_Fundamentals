@@ -189,8 +189,14 @@ const isInputDateCorrect = () => {
 };
 
 //Finish counting
+function beep() {
+    let snd = new Audio('./assets/bonus.wav');
+    snd.play();
+}
+
 const finish = () => {
     changeVisibility(bomb);
+    beep();
     changeVisibility(resultConteiner);
     clearInterval(setIntervalNumber);
     setTimeout(() => {
