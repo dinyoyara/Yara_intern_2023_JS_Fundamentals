@@ -88,11 +88,7 @@ const getPeriod = (inputDate) => {
 
 const getTimePeriod = (inputDate) => {
     const period = getPeriod(inputDate);
-    console.log(period);
-    if (period < 1000) {
-        console.log('💣');
-        finish();
-    }
+    period < 1000 && finish();
 
     timePeriod.days = Math.floor(period / (1000 * 60 * 60 * 24));
     timePeriod.hours = Math.floor((period % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
@@ -145,8 +141,9 @@ const switchInputFormsAndMainMessage = () => {
     changeVisibility(mainMessage);
 };
 
-const showMessage = (messageText) => {
+const showMessage = (messageText, messageSmallText = '') => {
     message.querySelector('.text').textContent = messageText;
+    message.querySelector('.text-small').textContent = messageSmallText;
     changeVisibility(message);
 };
 
@@ -167,7 +164,10 @@ const getMaxDayByMonth = (monthIndex) => {
         case '2':
             maxDays = 28;
             break;
-        case ('4', '6', '9', '11'):
+        case '4':
+        case '6':
+        case '9':
+        case '11':
             maxDays = 30;
             break;
     }
@@ -176,6 +176,7 @@ const getMaxDayByMonth = (monthIndex) => {
 
 const isInputDayCorrect = (day, monthIndex) => {
     const maxDayValue = getMaxDayByMonth(monthIndex);
+    console.log(maxDayValue);
     return Number(day) >= 1 && Number(day) <= maxDayValue ? true : false;
 };
 
@@ -204,7 +205,7 @@ const finish = () => {
 btnStart.addEventListener('click', () => {
     const inputDate = getInputDate();
     if (!isInputDateCorrect()) {
-        showMessage('This Date/Time might exist only in a parallel universe 👽');
+        showMessage('This Date/Time* might exist only in a parallel universe 👽', '*valid time : 00:00:00 - 23:59:59');
         return;
     }
     if (getPeriod(inputDate) <= 0) {
